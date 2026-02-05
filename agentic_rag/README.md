@@ -48,8 +48,8 @@ An intelligent Retrieval-Augmented Generation (RAG) system that combines the pow
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/Arindam200/awesome-ai-apps.git
-   cd rag_apps/agentic_rag
+   git clone https://github.com/Ajaykumar496/rag.git
+   cd rag/agentic_rag
    ```
 
 2. **Install dependencies**:
