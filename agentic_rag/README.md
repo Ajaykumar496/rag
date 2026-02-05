@@ -1,20 +1,20 @@
-![demo](./assets/demo.gif)
+# Agentic RAG with Agno & GPT-4o
 
-# 🤖 Agentic RAG with Agno & GPT-5
+Built by **Ajaykumar**
 
-An intelligent Retrieval-Augmented Generation (RAG) system that combines the power of OpenAI's GPT-4o with advanced knowledge retrieval capabilities. This application allows you to load multiple web URLs into a knowledge base and ask questions that are answered using both the retrieved context and the language model's capabilities.
+An intelligent Retrieval-Augmented Generation (RAG) system I built that combines OpenAI's GPT-4o with advanced knowledge retrieval. Load multiple web URLs into a knowledge base and ask questions — the system retrieves relevant context and generates accurate answers using both the indexed content and the language model.
 
-## ✨ Features
+## Features
 
-- **🧠 Dynamic Knowledge Base**: Load multiple URLs into a persistent vector database
-- **🔍 Intelligent Retrieval**: Advanced semantic search using OpenAI embeddings
-- **💬 Conversational Interface**: Streamlit-based chat interface for natural interactions
-- **📊 Observable AI**: Integrated with Arize Phoenix for monitoring and tracing
-- **🚀 Real-time Streaming**: Get responses as they're generated
-- **🔄 Knowledge Management**: Easy loading, viewing, and resetting of knowledge base
-- **⚡ Vector Search**: Lightning-fast similarity search using LanceDB
+- **Dynamic Knowledge Base** — Load multiple URLs into a persistent vector database
+- **Semantic Search** — Intelligent retrieval using OpenAI embeddings
+- **Chat Interface** — Streamlit-based conversational UI
+- **Observability** — Integrated with Arize Phoenix for monitoring and tracing
+- **Real-time Streaming** — Responses streamed as they're generated
+- **Knowledge Management** — Load, view, and reset the knowledge base easily
+- **Vector Search** — Fast similarity search powered by LanceDB
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -35,7 +35,7 @@ An intelligent Retrieval-Augmented Generation (RAG) system that combines the pow
                        └──────────────────┘
 ```
 
-## 🚀 Quick Start
+## Getting Started
 
 ### Prerequisites
 
@@ -45,7 +45,7 @@ An intelligent Retrieval-Augmented Generation (RAG) system that combines the pow
 
 ### Installation
 
-1. **Clone the repository**:
+1. **Clone the repo**:
 
    ```bash
    git clone https://github.com/Ajaykumar496/rag.git
@@ -58,132 +58,113 @@ An intelligent Retrieval-Augmented Generation (RAG) system that combines the pow
    uv sync
    ```
 
-3. **Set up environment variables**:
-   Create a `.env` file in the project directory:
+3. **Set up environment variables** — create a `.env` file:
 
    ```env
    OPENAI_API_KEY=your_openai_api_key_here
    ARIZE_PHOENIX_API_KEY=your_phoenix_api_key_here  # Optional
    ```
 
-4. **Run the application**:
+4. **Run the app**:
    ```bash
    uv run streamlit run main.py
    ```
 
-## 📚 Usage Guide
+## How to Use
 
-### Step 1: Add URLs to Knowledge Base
+### 1. Add URLs
 
-1. In the sidebar, add one or more URLs containing the information you want to query
-2. Click the **➕** button to add more URL fields
-3. URLs can be documentation sites, articles, blogs, or any web content
+- In the sidebar, enter one or more URLs you want to query
+- Click **+** to add more URL fields
+- Any web content works — docs, articles, blogs, etc.
 
-### Step 2: Load Knowledge Base
+### 2. Load Knowledge Base
 
-1. Click **"Load Knowledge Base"** to process and index the URLs
-2. Wait for the loading spinner to complete
-3. You'll see a success message and the loaded URLs listed
+- Click **"Load Knowledge Base"** to process and index the URLs
+- Wait for loading to finish — you'll see a success message with the loaded URLs
 
-### Step 3: Ask Questions
+### 3. Ask Questions
 
-1. Use the chat input at the bottom to ask questions
-2. The system will search the knowledge base and generate contextual answers
-3. Responses are streamed in real-time
+- Type your question in the chat input
+- The system searches the knowledge base and streams a contextual answer
 
-### Step 4: Manage Knowledge Base
+### 4. Manage Knowledge Base
 
-- **View Loaded URLs**: See currently loaded URLs in the sidebar
-- **Reset Knowledge Base**: Click **"🔄 Reset KB"** to clear and start over
-- **Add More URLs**: Add new URLs and reload the knowledge base
+- **View Loaded URLs** in the sidebar
+- **Reset** with the **"Reset KB"** button to clear and start fresh
+- **Add More URLs** anytime and reload
 
-## 🔧 Configuration
+## Configuration
 
-### Vector Database Settings
+### Vector Database
 
 ```python
 vector_db=LanceDb(
-    table_name="mcp-docs-knowledge-base",  # Table name for storing vectors
-    uri="tmp/lancedb",                     # Local storage path
-    search_type=SearchType.vector,         # Search algorithm
-    embedder=OpenAIEmbedder(id="text-embedding-3-small")  # Embedding model
+    table_name="mcp-docs-knowledge-base",
+    uri="tmp/lancedb",
+    search_type=SearchType.vector,
+    embedder=OpenAIEmbedder(id="text-embedding-3-small")
 )
 ```
 
-### Model Configuration
+### Model
 
 ```python
-model=OpenAIChat(id="gpt-4o")  # Can be changed to other OpenAI models
+model=OpenAIChat(id="gpt-4o")  # Can swap for other OpenAI models
 ```
 
-## 📊 Observability with Arize Phoenix
+## Observability
 
-This application integrates with Arize Phoenix for comprehensive monitoring:
+Integrated with Arize Phoenix for monitoring:
 
-- **Request Tracing**: Track all API calls and responses
-- **Performance Monitoring**: Monitor latency and token usage
-- **Error Tracking**: Capture and analyze failures
-- **Usage Analytics**: Understand query patterns and knowledge base effectiveness
+- **Request Tracing** — Track all API calls and responses
+- **Performance Monitoring** — Latency and token usage
+- **Error Tracking** — Capture and analyze failures
+- **Usage Analytics** — Query patterns and knowledge base effectiveness
 
-Visit [Arize Phoenix](https://app.phoenix.arize.com) to view your traces and analytics.
+Visit [Arize Phoenix](https://app.phoenix.arize.com) to view traces and analytics.
 
-## 🛠️ Key Components
+## Tech Stack
 
-### Core Functions
+| Technology | Purpose |
+|---|---|
+| [Agno](https://github.com/agno-ai/agno) | AI agent framework |
+| [Streamlit](https://streamlit.io/) | Web interface |
+| [LanceDB](https://lancedb.com/) | Vector database |
+| [OpenAI](https://openai.com/) | LLM and embeddings |
+| [Arize Phoenix](https://phoenix.arize.com/) | AI observability |
 
-- **`load_knowledge_base(urls)`**: Processes URLs and creates vector embeddings
-- **`agentic_rag_response(urls, query)`**: Generates responses using RAG methodology
+## Core Functions
 
-### Technologies Used
+- **`load_knowledge_base(urls)`** — Processes URLs and creates vector embeddings
+- **`agentic_rag_response(urls, query)`** — Generates responses using RAG
 
-- **[Agno](https://github.com/agno-ai/agno)**: AI agent framework
-- **[Streamlit](https://streamlit.io/)**: Web interface
-- **[LanceDB](https://lancedb.com/)**: Vector database
-- **[OpenAI](https://openai.com/)**: Language model and embeddings
-- **[Arize Phoenix](https://phoenix.arize.com/)**: AI observability
+## Use Cases
 
-## 📝 Example Use Cases
+- **Documentation Q&A** — Load API docs and ask implementation questions
+- **Research Assistant** — Index papers and query specific topics
+- **Company Knowledge Base** — Internal documents and policies
+- **Educational Content** — Course materials and study questions
+- **News Analysis** — Load articles and ask analytical questions
 
-1. **Documentation Q&A**: Load API documentation and ask implementation questions
-2. **Research Assistant**: Index research papers and query specific topics
-3. **Company Knowledge Base**: Load internal documents and policies for employee queries
-4. **Educational Content**: Index course materials and ask study questions
-5. **News Analysis**: Load news articles and ask analytical questions
+## Troubleshooting
 
-## 🔒 Security & Privacy
+**"Knowledge base not loaded" error:**
+- Make sure you clicked "Load Knowledge Base" after adding URLs
+- Check that URLs are accessible and contain readable content
 
-- **Local Processing**: Vector database is stored locally in `tmp/lancedb`
-- **API Security**: OpenAI API keys are securely handled through environment variables
-- **Data Control**: You control what URLs are indexed and can reset the knowledge base anytime
+**OpenAI API errors:**
+- Verify your API key and credits
+- Check internet connectivity
 
-## 🐛 Troubleshooting
+**Vector database issues:**
+- Clear the `tmp/lancedb` directory if corruption occurs
+- Restart the application
 
-### Common Issues
+## Contributing
 
-1. **"Knowledge base not loaded" error**:
+Contributions are welcome! Feel free to open issues, feature requests, or pull requests.
 
-   - Ensure you've clicked "Load Knowledge Base" after adding URLs
-   - Check that URLs are accessible and contain readable content
+## License
 
-2. **OpenAI API errors**:
-
-   - Verify your API key is correct and has sufficient credits
-   - Check internet connectivity
-
-3. **Vector database issues**:
-   - Clear the `tmp/lancedb` directory if you encounter database corruption
-   - Restart the application
-
-### Performance Tips
-
-- **URL Selection**: Choose URLs with high-quality, relevant content
-- **Knowledge Base Size**: Larger knowledge bases may take longer to load but provide more comprehensive answers
-- **Query Specificity**: More specific questions generally yield better results
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
-
-## 📜 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License — see the LICENSE file for details.
