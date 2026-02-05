@@ -1,0 +1,10 @@
+[project]
+name = "ai-resume-cover-letter-generator"
+version = "1.0.0"
+description = "AI-powered Resume and Cover Letter Generator using OpenAI GPT-4o"
+requires-python = ">=3.9"
+dependencies = [
+    "streamlit>=1.30.0",
+    "openai>=1.10.0",
+    "fpdf2>=2.7.0",
+]
